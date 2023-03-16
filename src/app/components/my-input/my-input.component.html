@@ -1,4 +1,4 @@
 <div class="my-4">
     <label for="{{name}}"  class="block text-sm mb-2"> <span class="text-red-500">*</span>{{name}}</label>
-    <input id="{{name}}" type="text" placeholder="{{name}}" name="{{name.toLowerCase()}}" class="input input-bordered p-2 w-full" (input)="onInputChange($event)">
+    <input id="{{name}}" type="{{type}}" placeholder="{{name}}" name="{{name.toLowerCase()}}" class="input input-bordered p-2 w-full" (input)="onInputChange($event)">
 </div>

@@ -9,7 +9,7 @@
           </div>
         <app-my-input name="Name" (inputValue)="onInputValueChange($event)"></app-my-input>
         <app-my-input name="Email" (inputValue)="onInputValueChange($event)"></app-my-input>
-        <app-my-input name="Password" (inputValue)="onInputValueChange($event)"></app-my-input>
+        <app-my-input name="Password" type="password" (inputValue)="onInputValueChange($event)"></app-my-input>
 
         <app-button  [isLoading]="signupData.isLoading" title="Signup" (btnClick)="onSignup()"></app-button>
 
