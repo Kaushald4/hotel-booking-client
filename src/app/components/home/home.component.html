@@ -1,0 +1,28 @@
+<div>
+    <app-navbar></app-navbar>
+
+    <div class="max-w-[1200px] mx-auto mt-5">
+        <div class="flex flex-wrap justify-center gap-5">
+            <div *ngFor="let room of allRooms" class="card w-96 bg-base-100 shadow-xl">
+                <figure><img src="{{room.photo[0].url}}" alt="photos" class="h-[300px]" /></figure>
+                <div class="card-body">
+                    <h2 class="card-title">{{room.title}}</h2>
+                    <p class="text-gray-500">{{room.description}}</p>
+                    <div class="flex items-start flex-col">
+                        <span class="line-through text-gray-400">Rs.{{room.price}}</span>
+                        <span class="text-xl">Rs.{{room.offeredPrice}}</span>
+                    </div>
+                    <div class="card-actions justify-between items-center">
+                       <div *ngIf="user && user.role === 'ADMIN'">
+                            <button class="inline-block mx-4 btn btn-sm btn-outline" routerLink="/edit/room/{{room._id}}">Edit</button>
+                            <button (click)="onDeleteRoom(room._id)" class="btn btn-sm btn-outline">Delete</button>
+                       </div>
+                       <div *ngIf="room.isBooked">Booked</div>
+                       <div *ngIf="room.isPending">Waiting for confirmation</div>
+                        <button *ngIf="!room.isBooked && !room.isPending" class="btn btn-primary" (click)="onBookRoom({hotelRoomId: room._id, price: room.price, offeredPrice: room.offeredPrice})">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

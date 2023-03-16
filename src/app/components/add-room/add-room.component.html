@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="flex">
+    <div class="w-[280px] h-screen bg-base-200 text-center">
+       <ul>
+        <li class="bg-base-200 py-2 px-2 mt-4">
+            <a routerLink="/add/room" routerLinkActive="active">ADD Hotel Rooms</a>
+        </li>
+       </ul>
+    </div>
+    <div class="w-full">
+        <h1 class="p-4">Add New Room</h1>
+        <div class="pl-6">
+            <div class="px-8">
+                <label for="title" class="block pb-2">Title</label>
+                <input type="text" [(ngModel)]="title" placeholder="title" class="input input-bordered p-2 w-full">
+            </div>
+            <div class="px-8 mt-4">
+                <label for="description" class="block pb-2">Description</label>
+                <input type="text" [(ngModel)]="description" placeholder="description" class="input input-bordered p-2 w-full">
+            </div>
+            <div class="px-8 mt-4">
+                <label for="price" class="block pb-2">Price</label>
+                <input type="number" [(ngModel)]="price" placeholder="Price" class="input input-bordered p-2 w-full">
+            </div>
+            <div class="px-8 mt-4">
+                <label for="offeredPrice" class="block pb-2">Offered Price</label>
+                <input type="number" [(ngModel)]="offeredPrice" id="offeredPrice" placeholder="offered price" class="input input-bordered p-2 w-full">
+            </div>
+            <div class="px-8 mt-4">
+                <label for="manager" class="block pb-2">Manager</label>
+                <select id="manager" class="select w-full select-bordered" [(ngModel)]="manager">
+                    <option disabled selected>Add Manager</option>
+                    <option value="{{user._id}}" *ngFor="let user of users" class="capitalize">{{user.name}}</option>
+                   
+                  </select>
+            </div>
+            
+            <div class="px-8 mt-4">
+                <label for="photo"  class="block pb-2">Room Photos</label>
+                <input id="photo" (change)="onFileSelected($event)" multiple maxlength="4" accept="image/*" type="file" class="file-input file-input-bordered w-full" />
+            </div>
+
+            <div class="mt-8 text-center px-8">
+                <button (click)="onClick()" [disabled]="isLoading" [ngClass]="isLoading ? 'btn btn-primary btn-outline w-full loading disabled:opacity-70' : 'btn btn-primary btn-outline w-full' ">{{isLoading ? 'Creating...' : 'Save'}}</button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

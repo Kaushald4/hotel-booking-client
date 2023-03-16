@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+<div class="flex">
+    <div class="w-[280px] h-screen bg-base-200 text-center">
+       <ul>
+       
+        <li class="bg-base-200 py-2 px-2 mt-4">
+            <a routerLink="/add/room">ADD Hotel Rooms</a>
+
+        </li>
+       </ul>
+    </div>
+    <div class="w-full">
+        <h1 class="text-xl ml-5 mt-5">All Bookings</h1>
+
+        <div class="mt-[200px] text-center" *ngIf="bookings.length === 0">
+            <h1 class="text-4xl">No Booking!</h1>
+        </div>
+        <div *ngIf="bookings.length >= 1" class="overflow-x-auto">
+            <table class="table w-full">
+              <!-- head -->
+              <thead>
+                <tr>
+                  <th class="w-[100px]"></th>
+                  <th [ngClass]="header === 'Action' ? 'w-[200px]' : 'w-[100px]' " *ngFor="let header of tableHeaders">{{header}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- row 1 -->
+                <tr *ngFor="let booking of bookings; let i = index">
+                    <th>{{i+1}}</th>
+                  <td class="w-[100px]">{{booking.hotelRoomId.title.substring(0, 40)}}</td>
+                  <td class="w-[100px] capitalize">{{booking.bookedBy.name}}</td>
+                  <td class="w-[100px] capitalize">Rs.{{booking.hotelRoomId.offeredPrice}}</td>
+                  <td class="w-[100px] capitalize">
+                    <div *ngIf="booking.isBooked" class="badge badge-success gap-2">
+                        Booked
+                      </div>
+                      <div *ngIf="!booking.isBooked" class="badge badge-error gap-2">
+                        Pending
+                      </div>
+                  </td>
+                  <td *ngIf="!booking.isBooked">
+                    <button class="btn btn-sm btn-outline" (click)="onBookApproveClick(booking._id)">Approve</button>
+                    <button class="btn btn-sm btn-outline" (click)="onRjectClick(booking._id,booking.hotelRoomId._id)">Reject</button>
+                </td>
+                <td *ngIf="booking.isBooked">
+                    <button  class="btn btn-sm btn-outline" (click)="onRjectClick(booking._id,booking.hotelRoomId._id)">Delete</button>
+                </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div>
+    </div>
+</div>

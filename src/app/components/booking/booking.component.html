@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+
+<div>
+    <h1 class="text-4xl text-center mt-5 ">My Bookings</h1>
+
+    <div class="max-w-[1200px] mx-auto mt-5">
+        <div class="flex flex-wrap justify-center gap-5">
+            <div *ngFor="let booking of myBookings" class="card w-96 bg-base-100 shadow-xl">
+                <figure><img src="{{booking.hotelRoomId.photo[0].url}}" alt="photos" /></figure>
+                <div class="card-body">
+                    <h2 class="card-title">{{booking.hotelRoomId.title}}</h2>
+                    <p class="text-gray-500">{{booking.hotelRoomId.description}}</p>
+                    <div class="flex items-start flex-col">
+                        <span class="line-through text-gray-400">Rs.{{booking.hotelRoomId.price}}</span>
+                        <span class="text-xl">Rs.{{booking.hotelRoomId.offeredPrice}}</span>
+                    </div>
+                    <div class="card-actions justify-between items-center">
+                       <div *ngIf="!booking.isConfirmed">
+                            <button (click)="onCancelBooking(booking._id, booking.hotelRoomId._id)" class="btn btn-sm btn-outline">Cancel My Booking</button>
+                       </div>
+                       <div *ngIf="booking.isBooked">Booked</div>
+                       <div *ngIf="!booking.isConfirmed">Waiting for confirmation</div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
